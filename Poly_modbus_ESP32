@@ -80,3 +80,99 @@ binary_sensor:
     register_type: "read"
     bitmask: 0x01 #(Bit 1)
 
+number:
+  - platform: modbus_controller
+    name: "FW ver"
+    address: 1000
+    value_type: U_WORD
+
+  - platform: modbus_controller
+    name: "FW ver"
+    address: 1004
+    value_type: U_DWORD
+
+select:
+  - platform: modbus_controller
+    name: "Pressure Units"
+    address: 1001
+    value_type: U_WORD
+    optionsmap:
+      "ATM": 0
+      "MPA": 1
+      "KgCM": 2
+
+  - platform: modbus_controller
+    name: "Leakage Sensor"
+    address: 1002
+    value_type: U_WORD
+    optionsmap:
+      "Not Exists": 0
+      "Exists": 1
+
+  - platform: modbus_controller
+    name: "Consumption Sensor Type"
+    address: 1003
+    value_type: U_WORD
+    optionsmap:
+      "Digital": 0
+      "Relay": 1
+      "OFF": 2
+
+  - platform: modbus_controller
+    name: "Control Mode"
+    address: 1006
+    value_type: U_WORD
+    optionsmap:
+      "PI": 0
+      "PID": 1
+      "Lin": 2
+      "Fill": 3
+      "OFF": 4
+
+  - platform: modbus_controller
+    name: "Backlight Mode"
+    address: 1024
+    value_type: U_WORD
+    optionsmap:
+      "Permanent": 0
+      "1 Min": 1
+      "5 Min": 2
+
+  - platform: modbus_controller
+    name: "Relay 2 Mode"
+    address: 1037
+    value_type: U_WORD
+    optionsmap:
+      "OFF": 0
+      "Alarm": 1
+      "Low": 2
+      "High": 3
+      "Second Pump": 4
+
+  - platform: modbus_controller
+    name: "Modbus Speed"
+    address: 1501
+    value_type: U_WORD
+    optionsmap:
+      "9600": 0
+      "19200": 1
+      "38400": 2
+      "57600": 3
+      "115200": 4
+
+  - platform: modbus_controller
+    name: "Modbus Parity"
+    address: 1502
+    value_type: U_WORD
+    optionsmap:
+      "None": 0
+      "ODD": 1
+      "EVEN": 2
+
+  - platform: modbus_controller
+    name: "Modbus Stop Bits"
+    address: 1503
+    value_type: U_WORD
+    optionsmap:
+      "1": 1
+      "2": 2

@@ -1,3 +1,62 @@
 # For ESPHome plaform (ESP32)
 # Framework: Arduino
+# Water Pressure Controller PID/PI KD-M-PchS (Polytech)
 
+uart:
+  - id: uart_modbus_client
+    tx_pin: 16
+    rx_pin: 17
+
+modbus:
+  - uart_id: uart_modbus_client
+    id: modbus_client
+
+modbus_controller:
+  - id: KD-M-PchS
+    modbus_id: modbus_client
+    address: 10
+    update_interval: 10s
+
+sensors:
+  - platform: modbus_controller
+    name: "Current Pressure"
+    address: 1100
+    register_type: "read"
+    value_type: FP32
+
+  - platform: modbus_controller
+    name: "Current Power"
+    address: 1102
+    register_type: "read"
+    value_type: FP32
+
+  - platform: modbus_controller
+    name: "Total Water Consuption"
+    address: 1104
+    register_type: "read"
+    value_type: FP32
+
+  - platform: modbus_controller
+    name: "Instant Water Flow"
+    address: 1106
+    register_type: "read"
+    value_type: FP32
+#    accuracy_decimals: 1
+
+  - platform: modbus_controller
+    name: "Total Pump Working Time"
+    address: 1108
+    register_type: "read"
+    value_type: FP32
+
+  - platform: modbus_controller
+    name: "Leakage"
+    address: 1110
+    register_type: "read"
+    value_type: U_WORD
+
+  - platform: modbus_controller
+    name: "Pump ON"
+    address: 1111
+    register_type: "read"
+    value_type: U_WORD

@@ -7,11 +7,10 @@ Register Type - Holding
 | Address  | Type    | Size | Access | Values     | Default       | Description
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
 |    0999  | rsWord  |    1 |     RO |            |               | Version (XXYY)
-|    1000  | rsWord  |    1 |     RO |            |               | HW Version (???)
-|    1001  | rsWord  |    1 |     RW | 0,1,2      |             1 | Pressure Units (0 = ATM, 1 = MPA, 2 = KgCm2)
-|    1002  | rsWord  |    1 |     RW | 1..2       |             2 | Leak Sensor Exists (2 = OFF, 1 = Exist) 
-|    1003  | rsWord  |    1 |     RW | 0..999     |           100 | Consumption Clicks (Clicks per Liter)
-|    1004  | rsWord  |    1 |     RW | 0,1,2      |             2 | Consumption Sensor Type (cstDigital = 0 , cstRelay = 1, cstOff = 2)
+|    1000  | rsWord  |    1 |     RW | 0,1,2      |             1 | Pressure Units (0 = ATM, 1 = MPA, 2 = KgCm2)
+|    1001  | rsWord  |    1 |     RW | 0..1       |             0 | Leak Sensor Exists (0 = OFF, 1 = Exist) 
+|    1002  | rsWord  |    1 |     RW | 0,1,2      |             2 | Consumption Sensor Type (cstDigital = 0 , cstRelay = 1, cstOff = 2)
+|    1003  | rsInt   |    2 |     RW | 0..999     |           100 | Consumption Clicks (Clicks per Liter)
 |    1005  | rsWord  |    1 |     RW | 0..4       |             2 | Control Mode (cmPi = 0,  cmPid = 1, cmLin = 2,  cmFill = 3,  cOff = 4)
 |    1006  | rsFloat |    2 |     RW | 0..X,00    |          0,15 | Pressure Min 
 |    1008  | rsFloat |    2 |     RW | 0..X,00    |          0,25 | Pressure Max

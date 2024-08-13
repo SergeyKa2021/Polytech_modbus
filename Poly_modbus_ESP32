@@ -49,18 +49,6 @@ sensor:
     register_type: "read"
     value_type: FP32
 
-#  - platform: modbus_controller
-#    name: "Leakage"
-#    address: 1110
-#    register_type: "read"
-#    value_type: U_WORD
-#
-#  - platform: modbus_controller
-#    name: "Pump ON"
-#    address: 1111
-#    register_type: "read"
-#    value_type: U_WORD
-
   - platform: modbus_controller
     name: "Error Code"
     address: 1112

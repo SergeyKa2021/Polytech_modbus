@@ -6,9 +6,10 @@ Register Type - Holding
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
 | Address  | Type    | Size | Access | Values     | Default       | Description
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-|    1000  | rsWord  |    1 |     RO |            |               | HW Version
+|    0999  | rsWord  |    1 |     RO |            |               | Version (XXYY)
+|    1000  | rsWord  |    1 |     RO |            |               | HW Version (???)
 |    1001  | rsWord  |    1 |     RW | 0,1,2      |             1 | Pressure Units (0 = ATM, 1 = MPA, 2 = KgCm2)
-|    1002  | rsWord  |    1 |     RW | 0..1       |             0 | Leak Sensor Exists 
+|    1002  | rsWord  |    1 |     RW | 1..2       |             2 | Leak Sensor Exists (2 = OFF, 1 = Exist) 
 |    1003  | rsWord  |    1 |     RW | 0..999     |           100 | Consumption Clicks (Clicks per Liter)
 |    1004  | rsWord  |    1 |     RW | 0,1,2      |             2 | Consumption Sensor Type (cstDigital = 0 , cstRelay = 1, cstOff = 2)
 |    1005  | rsWord  |    1 |     RW | 0..4       |             2 | Control Mode (cmPi = 0,  cmPid = 1, cmLin = 2,  cmFill = 3,  cOff = 4)
@@ -37,18 +38,18 @@ Register Type - Holding
 |    1041  | rsWord  |    1 |     RW | 0..999     |             5 | Relay 2 Second Pump Delay Time (Seconds)
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
 
-/// Sensors
+/// Sensors (Holdings)
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
 | Address  | Type    | Size | Access | Values     | Default       | Description
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-|    1100  | rsFloat |    2 |     RO |            |               | Current Pressure 
-|    1102  | rsFloat |    2 |     RO |            |               | Current Power
-|    1104  | rsFloat |    2 |     RO |            |               | Water Total Volume (Litres)
-|    1106  | rsFloat |    2 |     RO |            |               | Instant Water Value (Litres per Min/Sec?)
-|    1108  | rsInt   |    2 |     RO |            |               | Pump Total Working Time
-|    1110  | rsWord  |    1 |     RO | 0..1       |               | Is Leak
-|    1111  | rsWord  |    1 |     RO | 0..1       |               | Is Working
-|    1112  | rsInt   |    2 |     RW |            |             0 | Error Code (Write 0 to reset) 
+|    1099  | rsFloat |    2 |     RO |            |               | Current Pressure 
+|    1101  | rsFloat |    2 |     RO |            |               | Current Power
+|    1103  | rsFloat |    2 |     RO |            |               | Water Total Volume (Litres)
+|    1105  | rsFloat |    2 |     RO |            |               | Instant Water Value (Litres per Min/Sec?)
+|    1107  | rsInt   |    2 |     RO |            |               | Pump Total Working Time
+|    1109  | rsWord  |    1 |     RO | 0..1       |               | Is Leak
+|    1110  | rsWord  |    1 |     RO | 0..1       |               | Is Working
+|    1111  | rsInt   |    2 |     RW |            |             0 | Error Code (Write 0 to reset) 
 |          |         |      |        |            |               | 0 = Normal, 
 |          |         |      |        |            |               | 10 = Pressure below low limit? 
 |          |         |      |        |            |               | 11 = Max Working Time Expired, 
@@ -61,20 +62,20 @@ Register Type - Holding
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
 | Address  | Type    | Size | Access | Values     | Default       | Description
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-|    1400  | rsWord  |    1 |     WO | 1          |               | Write config into EEPROM, recalculate PID
-|    1401  | rsWord  |    1 |     WO | 1          |               | Read config from EEPROM, recalculate PID
-|    1402  | rsWord  |    1 |     WO | 1          |               | Factory Reset
-|    1403  | rsWord  |    1 |     WO | 1          |               | Reboot device
+|    1399  | rsWord  |    1 |     WO | 1          |               | Write config into EEPROM, recalculate PID
+|    1400  | rsWord  |    1 |     WO | 1          |               | Read config from EEPROM, recalculate PID
+|    1401  | rsWord  |    1 |     WO | 1          |               | Factory Reset
+|    1402  | rsWord  |    1 |     WO | 1          |               | Reboot device
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
 
 /// MODBUS Settings
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
 | Address  | Type    | Size | Access | Values     | Default       | Description
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-|    1500  | rsWord  |    1 |     RW | 1..247     |            10 | MODBUS Address
-|    1501  | rsWord  |    1 |     RW | 0..4       |             0 | MODBUS Speed (mbs9600 = 0,  mbs19200 = 1,  mbs38400 = 2,  mbs57600 = 3,  mbs115200 = 4)
-|    1502  | rsWord  |    1 |     RW | 0,1,2      |             2 | MODBUS Parity (0 = NONE, 1 = ODD,  2 = EVEN)
-|    1503  | rsWord  |    1 |     RW | 1..2       |             1 | MODBUS Stop Bits
+|    1499  | rsWord  |    1 |     RW | 1..247     |            10 | MODBUS Address
+|    1500  | rsWord  |    1 |     RW | 0..4       |             0 | MODBUS Speed (mbs9600 = 0,  mbs19200 = 1,  mbs38400 = 2,  mbs57600 = 3,  mbs115200 = 4)
+|    1501  | rsWord  |    1 |     RW | 0,1,2      |             2 | MODBUS Parity (0 = NONE, 1 = ODD,  2 = EVEN)
+|    1502  | rsWord  |    1 |     RW | 1..2       |             1 | MODBUS Stop Bits
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
 
 /// Diagnostic

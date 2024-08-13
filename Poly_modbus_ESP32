@@ -6,6 +6,10 @@ uart:
   - id: uart_modbus_client
     tx_pin: 16
     rx_pin: 17
+    baud_rate: 38400
+    stop_bits: 1
+    parity: EVEN
+    debug: 
 
 modbus:
   - uart_id: uart_modbus_client
@@ -22,38 +26,41 @@ sensor:
     name: "Current Pressure"
     address: 1099
     register_type: holding
-    value_type: FP32
+    value_type: FP32_R
+    accuracy_decimals: 1
 
   - platform: modbus_controller
     name: "Current Power"
     address: 1101
     register_type: holding
-    value_type: FP32
+    value_type: FP32_R
+    accuracy_decimals: 0
 
   - platform: modbus_controller
     name: "Total Water Consuption"
     address: 1103
     register_type: holding
-    value_type: FP32
+    value_type: FP32_R
+    accuracy_decimals: 1
 
   - platform: modbus_controller
     name: "Instant Water Flow"
     address: 1105
     register_type: holding
-    value_type: FP32
-#    accuracy_decimals: 1
+    value_type: FP32_R
+    accuracy_decimals: 1
 
   - platform: modbus_controller
     name: "Total Pump Working Time"
     address: 1107
     register_type: holding
-    value_type: FP32
+    value_type: FP32_R
 
   - platform: modbus_controller
     name: "Error Code"
     address: 1111
     register_type: holding
-    value_type: U_DWORD
+    value_type: U_DWORD_R
 
 binary_sensor:
   - platform: modbus_controller
@@ -77,47 +84,74 @@ number:
   - platform: modbus_controller
     name: "Consumption Sensor Clicks"
     address: 1003
-    value_type: U_DWORD
+    value_type: U_DWORD_R
+    min_value: 0
+    max_value: 999
+    step: 1
 
   - platform: modbus_controller
     name: "Pressure MIN"
     address: 1006
-    value_type: FP32
+    value_type: FP32_R
+    min_value: 0.0
+    max_value: 2.5
+    step: 0.1
   
   - platform: modbus_controller
     name: "Pressure MAX"
     address: 1008
-    value_type: FP32
+    value_type: FP32_R
+    min_value: 0.0
+    max_value: 5.0
+    step: 0.1
 
   - platform: modbus_controller
     name: "Low Pressure Response Time"
     address: 1010
-    value_type: U_DWORD
+    value_type: U_DWORD_R
+    min_value: 0
+    max_value: 999
+    step: 1
 
   - platform: modbus_controller
     name: "Pump MIN Working Time"
     address: 1012
-    value_type: U_DWORD
+    value_type: U_DWORD_R
+    min_value: 0
+    max_value: 60
+    step: 1
 
   - platform: modbus_controller
     name: "Pump MAX Working Time"
     address: 1014
-    value_type: U_DWORD
+    value_type: U_DWORD_R
+    min_value: 0
+    max_value: 999
+    step: 1
 
   - platform: modbus_controller
     name: "User Pressure Zero Point"
     address: 1016
-    value_type: FP32
+    value_type: FP32_R
+    min_value: 0.0
+    max_value: 12.0
+    step: 0.1
 
   - platform: modbus_controller
     name: "User Pressure Correction Coefficient"
     address: 1018
-    value_type: FP32
+    value_type: FP32_R
+    min_value: 0.00
+    max_value: 10.0
+    step: 0.01
 
   - platform: modbus_controller
     name: "Modbus address"
     address: 1499
     value_type: U_WORD
+    min_value: 1
+    max_value: 247
+    step: 1
 
 select:
   - platform: modbus_controller
@@ -205,3 +239,45 @@ select:
     optionsmap:
       "1": 1
       "2": 2
+
+switch:
+  - platform: modbus_controller
+#    modbus_controller_id: epever
+    id: write_to_eeprom
+    register_type: holding
+    address: 1499
+    name: "Write settings to EEPROM"
+    bitmask: 1
+
+  - platform: modbus_controller
+#    modbus_controller_id: epever
+    id: read_from_eeprom
+    register_type: holding
+    address: 1500
+    name: "Read settings to EEPROM"
+    bitmask: 1
+
+  - platform: modbus_controller
+#    modbus_controller_id: epever
+    id: factory_reset
+    register_type: holding
+    address: 1501
+    name: "Factory reset"
+    bitmask: 1
+
+  - platform: modbus_controller
+#    modbus_controller_id: epever
+    id: reboot_device
+    register_type: holding
+    address: 1502
+    name: "Reboot device"
+    bitmask: 1
+
+
+  - platform: modbus_controller
+#    modbus_controller_id: epever
+    id: error_reset
+#    address: 1111
+    name: "Reboot device"
+#    bitmask: 1
+    custom_command: [ 0xA, 0x3, 0x4, 0x57,0x00 , 0x00, 0x51, 0xF4 ]

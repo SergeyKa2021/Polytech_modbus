@@ -7,7 +7,7 @@ Register Type - Holding
 | Address  | Type    | Size | Access | Values     | Default       | Description
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
 |    1000  | rsWord  |    1 |     RO |            |               | HW Version
-|    1001  | rsWord  |    1 |     RW | 0,1,2      |             1 | Pressure Units (0 - ATM, 1 - MPA, 2 - KgCm)
+|    1001  | rsWord  |    1 |     RW | 0,1,2      |             1 | Pressure Units (0 = ATM, 1 = MPA, 2 = KgCm2)
 |    1002  | rsWord  |    1 |     RW | 0..1       |             0 | Leak Sensor Exists 
 |    1003  | rsWord  |    1 |     RW | 0..999     |           100 | Consumption Clicks (Clicks per Liter)
 |    1004  | rsWord  |    1 |     RW | 0,1,2      |             2 | Consumption Sensor Type (cstDigital = 0 , cstRelay = 1, cstOff = 2)
@@ -20,14 +20,14 @@ Register Type - Holding
 |    1016  | rsFloat |    2 |     RW | 0..X,00    |             0 | User Pressure Zero Point 
 |    1018  | rsFloat |    2 |     RW | 0..X,00    |             0 | User Pressure Correction Coefficient 
 |    1020  | rsWord  |    1 |     RW | 0..60      |             0 | Auto Error Reset Time 
-|    1021  | rsWord  |    1 |     RW | 0..999     |             0 | Water Value Per Session (Litres)  
+|    1021  | rsWord  |    1 |     RW | 0..999     |             0 | Water Value Per Session Limit (Litres) (0 = OFF) 
 |    1022  | rsWord  |    1 |     RW | 0..10800   |            10 | Pump Rest Time (Seconds) 
 |    1023  | rsWord  |    1 |     RW | 0,1,2      |             1 | Backlight Mode (0 - permanent, 1 - 1 Min, 2 - 5 Min)
-|    1024  | rsFloat |    2 |     RW | 0..100,0   |          15,0 | Pump Percent Min Power
+|    1024  | rsFloat |    2 |     RW | 0..100,0   |         100,0 | Pump Percent Min Power
 |    1026  | rsFloat |    2 |     RW | 0..100,0   |         100,0 | Pump Percent Max Power
-|    1028  | rsFloat |    2 |     RW | 0..9,99    |           0,1 | PID P
-|    1030  | rsFloat |    2 |     RW | 0..9,99    |           0,1 | PID I
-|    1032  | rsFloat |    2 |     RW | 0..9,99    |           0,1 | PID D
+|    1028  | rsFloat |    2 |     RW | 0..9,99    |           2,0 | PID P
+|    1030  | rsFloat |    2 |     RW | 0..9,99    |           1,5 | PID I
+|    1032  | rsFloat |    2 |     RW | 0..9,99    |           1,0 | PID D
 |    1034  | rsFloat |    2 |     RW | 0,01..9,99 |           0,2 | PID Time
 |    1036  | rsWord  |    1 |     RW | 0..5       |             0 | Relay 2 Mode (Off = 0, Alarm = 1, Low = 2, High = 3, SecondPump = 4, FirstPump = 5)
 |    1037  | rsWord  |    1 |     RW | 0..999     |             5 | Relay 2 Low Delay Time (Seconds) 
@@ -48,7 +48,13 @@ Register Type - Holding
 |    1108  | rsInt   |    2 |     RO |            |               | Pump Total Working Time
 |    1110  | rsWord  |    1 |     RO | 0..1       |               | Is Leak
 |    1111  | rsWord  |    1 |     RO | 0..1       |               | Is Working
-|    1112  | rsInt   |    2 |     RW |            |             0 | Error Code (Write 0 to reset)
+|    1112  | rsInt   |    2 |     RW |            |             0 | Error Code (Write 0 to reset) 
+|          |         |      |        |            |               | 0 = Normal, 
+|          |         |      |        |            |               | 10 = Pressure below low limit? 
+|          |         |      |        |            |               | 11 = Max Working Time Expired, 
+|          |         |      |        |            |               | 20 = No data from consumption sensor (Dig mode),
+|          |         |      |        |            |               | 21 = No data from consumption sensor (Relay mode),
+|          |         |      |        |            |               | 40 = Water Leakage
 +----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
 
 /// Config read/write, reset and reboot

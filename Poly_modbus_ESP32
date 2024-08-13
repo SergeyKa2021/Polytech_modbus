@@ -20,64 +20,64 @@ modbus_controller:
 sensor:
   - platform: modbus_controller
     name: "Current Pressure"
-    address: 1100
-    register_type: read
+    address: 1099
+    register_type: holding
     value_type: FP32
 
   - platform: modbus_controller
     name: "Current Power"
-    address: 1102
-    register_type: read
+    address: 1101
+    register_type: holding
     value_type: FP32
 
   - platform: modbus_controller
     name: "Total Water Consuption"
-    address: 1104
-    register_type: "read"
+    address: 1103
+    register_type: holding
     value_type: FP32
 
   - platform: modbus_controller
     name: "Instant Water Flow"
-    address: 1106
-    register_type: "read"
+    address: 1105
+    register_type: holding
     value_type: FP32
 #    accuracy_decimals: 1
 
   - platform: modbus_controller
     name: "Total Pump Working Time"
-    address: 1108
-    register_type: "read"
+    address: 1107
+    register_type: holding
     value_type: FP32
 
   - platform: modbus_controller
     name: "Error Code"
-    address: 1112
+    address: 1111
     register_type: holding
     value_type: U_DWORD
 
 binary_sensor:
   - platform: modbus_controller
     name: "Leakage"
-    address: 1110
-    register_type: read
+    address: 1109
+    register_type: holding
     bitmask: 0x01 #(Bit 1)
 
   - platform: modbus_controller
     name: "Pump ON"
-    address: 1111
-    register_type: read
+    address: 1110
+    register_type: holding
     bitmask: 0x01 #(Bit 1)
 
 number:
   - platform: modbus_controller
     name: "Version"
-    address: 1000
+    address: 999
     value_type: U_WORD
 
   - platform: modbus_controller
     name: "Consumption Sensor Clicks"
     address: 1003
-    value_type: U_WORD
+    value_type: U_DWORD
 
   - platform: modbus_controller
     name: "Pressure MIN"
@@ -114,10 +114,15 @@ number:
     address: 1018
     value_type: FP32
 
+  - platform: modbus_controller
+    name: "Modbus address"
+    address: 1499
+    value_type: U_WORD
+
 select:
   - platform: modbus_controller
     name: "Pressure Units"
-    address: 1001
+    address: 1000
     value_type: U_WORD
     optionsmap:
       "ATM": 0
@@ -126,7 +131,7 @@ select:
 
   - platform: modbus_controller
     name: "Leakage Sensor"
-    address: 1002
+    address: 1001
     value_type: U_WORD
     optionsmap:
       "Not Exists": 0
@@ -134,7 +139,7 @@ select:
 
   - platform: modbus_controller
     name: "Consumption Sensor Type"
-    address: 1004
+    address: 1002
     value_type: U_WORD
     optionsmap:
       "Digital": 0
@@ -175,7 +180,7 @@ select:
 
   - platform: modbus_controller
     name: "Modbus Speed"
-    address: 1501
+    address: 1500
     value_type: U_WORD
     optionsmap:
       "9600": 0
@@ -186,7 +191,7 @@ select:
 
   - platform: modbus_controller
     name: "Modbus Parity"
-    address: 1502
+    address: 1501
     value_type: U_WORD
     optionsmap:
       "None": 0
@@ -195,7 +200,7 @@ select:
 
   - platform: modbus_controller
     name: "Modbus Stop Bits"
-    address: 1503
+    address: 1502
     value_type: U_WORD
     optionsmap:
       "1": 1

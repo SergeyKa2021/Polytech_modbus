@@ -12,22 +12,22 @@ modbus:
     id: modbus_client
 
 modbus_controller:
-  - id: KD-M-PchS
+  - id: KD_M_PCHS
     modbus_id: modbus_client
     address: 10
     update_interval: 10s
 
-sensors:
+sensor:
   - platform: modbus_controller
     name: "Current Pressure"
     address: 1100
-    register_type: "read"
+    register_type: read
     value_type: FP32
 
   - platform: modbus_controller
     name: "Current Power"
     address: 1102
-    register_type: "read"
+    register_type: read
     value_type: FP32
 
   - platform: modbus_controller
@@ -71,25 +71,60 @@ binary_sensor:
   - platform: modbus_controller
     name: "Leakage"
     address: 1110
-    register_type: "read"
+    register_type: read
     bitmask: 0x01 #(Bit 1)
 
   - platform: modbus_controller
     name: "Pump ON"
     address: 1111
-    register_type: "read"
+    register_type: read
     bitmask: 0x01 #(Bit 1)
 
 number:
   - platform: modbus_controller
-    name: "FW ver"
+    name: "Version"
     address: 1000
     value_type: U_WORD
 
   - platform: modbus_controller
-    name: "FW ver"
-    address: 1004
+    name: "Consumption Sensor Clicks"
+    address: 1003
+    value_type: U_WORD
+
+  - platform: modbus_controller
+    name: "Pressure MIN"
+    address: 1006
+    value_type: FP32
+  
+  - platform: modbus_controller
+    name: "Pressure MAX"
+    address: 1008
+    value_type: FP32
+
+  - platform: modbus_controller
+    name: "Low Pressure Response Time"
+    address: 1010
     value_type: U_DWORD
+
+  - platform: modbus_controller
+    name: "Pump MIN Working Time"
+    address: 1012
+    value_type: U_DWORD
+
+  - platform: modbus_controller
+    name: "Pump MAX Working Time"
+    address: 1014
+    value_type: U_DWORD
+
+  - platform: modbus_controller
+    name: "User Pressure Zero Point"
+    address: 1016
+    value_type: FP32
+
+  - platform: modbus_controller
+    name: "User Pressure Correction Coefficient"
+    address: 1018
+    value_type: FP32
 
 select:
   - platform: modbus_controller
@@ -111,7 +146,7 @@ select:
 
   - platform: modbus_controller
     name: "Consumption Sensor Type"
-    address: 1003
+    address: 1004
     value_type: U_WORD
     optionsmap:
       "Digital": 0
@@ -120,7 +155,7 @@ select:
 
   - platform: modbus_controller
     name: "Control Mode"
-    address: 1006
+    address: 1005
     value_type: U_WORD
     optionsmap:
       "PI": 0
@@ -131,7 +166,7 @@ select:
 
   - platform: modbus_controller
     name: "Backlight Mode"
-    address: 1024
+    address: 1023
     value_type: U_WORD
     optionsmap:
       "Permanent": 0
@@ -140,7 +175,7 @@ select:
 
   - platform: modbus_controller
     name: "Relay 2 Mode"
-    address: 1037
+    address: 1036
     value_type: U_WORD
     optionsmap:
       "OFF": 0
@@ -148,6 +183,7 @@ select:
       "Low": 2
       "High": 3
       "Second Pump": 4
+      "First Pump": 5
 
   - platform: modbus_controller
     name: "Modbus Speed"

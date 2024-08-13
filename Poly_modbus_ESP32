@@ -242,7 +242,6 @@ select:
 
 switch:
   - platform: modbus_controller
-#    modbus_controller_id: epever
     id: write_to_eeprom
     register_type: holding
     address: 1499
@@ -250,7 +249,6 @@ switch:
     bitmask: 1
 
   - platform: modbus_controller
-#    modbus_controller_id: epever
     id: read_from_eeprom
     register_type: holding
     address: 1500
@@ -258,7 +256,6 @@ switch:
     bitmask: 1
 
   - platform: modbus_controller
-#    modbus_controller_id: epever
     id: factory_reset
     register_type: holding
     address: 1501
@@ -266,7 +263,6 @@ switch:
     bitmask: 1
 
   - platform: modbus_controller
-#    modbus_controller_id: epever
     id: reboot_device
     register_type: holding
     address: 1502
@@ -275,9 +271,6 @@ switch:
 
 
   - platform: modbus_controller
-#    modbus_controller_id: epever
     id: error_reset
-#    address: 1111
     name: "Reboot device"
-#    bitmask: 1
     custom_command: [ 0xA, 0x6, 0x4, 0x57, 0x00, 0x00 ]

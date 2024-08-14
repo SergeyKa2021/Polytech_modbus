@@ -1,0 +1,279 @@
+# For ESPHome plaform (ESP32)
+# Framework: Arduino
+# Water Pressure Controller PID/PI KD-M-PchS (Polytech)
+
+uart:
+  - id: uart_modbus_client
+    tx_pin: 16
+    rx_pin: 17
+    baud_rate: 38400
+    stop_bits: 1
+    parity: EVEN
+    debug: 
+
+modbus:
+  - uart_id: uart_modbus_client
+    id: modbus_client
+
+modbus_controller:
+  - id: KD_M_PCHS
+    modbus_id: modbus_client
+    address: 10
+    setup_priority: -10
+    update_interval: 10s
+
+sensor:
+  - platform: modbus_controller
+    modbus_controller_id: KD_M_PCHS
+    name: "Current Pressure"
+    address: 1099
+    register_type: holding
+    value_type: FP32_R
+    accuracy_decimals: 1
+
+  - platform: modbus_controller
+    name: "Current Power"
+    address: 1101
+    register_type: holding
+    value_type: FP32_R
+    accuracy_decimals: 0
+
+  - platform: modbus_controller
+    name: "Total Water Consuption"
+    address: 1103
+    register_type: holding
+    value_type: FP32_R
+    accuracy_decimals: 1
+
+  - platform: modbus_controller
+    name: "Instant Water Flow"
+    address: 1105
+    register_type: holding
+    value_type: FP32_R
+    accuracy_decimals: 1
+
+  - platform: modbus_controller
+    name: "Total Pump Working Time"
+    address: 1107
+    register_type: holding
+    value_type: FP32_R
+
+  - platform: modbus_controller
+    name: "Error Code"
+    address: 1111
+    register_type: holding
+    value_type: U_DWORD_R
+
+binary_sensor:
+  - platform: modbus_controller
+    name: "Leakage"
+    address: 1109
+    register_type: holding
+    bitmask: 0x01 #(Bit 1)
+
+  - platform: modbus_controller
+    name: "Pump ON"
+    address: 1110
+    register_type: holding
+    bitmask: 0x01 #(Bit 1)
+
+number:
+  - platform: modbus_controller
+    name: "Version"
+    address: 999
+    value_type: U_WORD
+    skip_updates: 30
+
+  - platform: modbus_controller
+    name: "Consumption Sensor Clicks"
+    address: 1003
+    value_type: U_DWORD_R
+    min_value: 0
+    max_value: 999
+    step: 1
+
+  - platform: modbus_controller
+    name: "Pressure MIN"
+    address: 1006
+    value_type: FP32_R
+    min_value: 0.0
+    max_value: 2.5
+    step: 0.1
+  
+  - platform: modbus_controller
+    name: "Pressure MAX"
+    address: 1008
+    value_type: FP32_R
+    min_value: 0.0
+    max_value: 5.0
+    step: 0.1
+
+  - platform: modbus_controller
+    name: "Low Pressure Response Time"
+    address: 1010
+    value_type: U_DWORD_R
+    min_value: 0
+    max_value: 999
+    step: 1
+
+  - platform: modbus_controller
+    name: "Pump MIN Working Time"
+    address: 1012
+    value_type: U_DWORD_R
+    min_value: 0
+    max_value: 60
+    step: 1
+
+  - platform: modbus_controller
+    name: "Pump MAX Working Time"
+    address: 1014
+    value_type: U_DWORD_R
+    min_value: 0
+    max_value: 999
+    step: 1
+
+  - platform: modbus_controller
+    name: "User Pressure Zero Point"
+    address: 1016
+    value_type: FP32_R
+    min_value: 0.0
+    max_value: 12.0
+    step: 0.1
+
+  - platform: modbus_controller
+    name: "User Pressure Correction Coefficient"
+    address: 1018
+    value_type: FP32_R
+    min_value: 0.00
+    max_value: 10.0
+    step: 0.01
+
+  - platform: modbus_controller
+    name: "Modbus address"
+    address: 1499
+    value_type: U_WORD
+    min_value: 1
+    max_value: 247
+    step: 1
+
+select:
+  - platform: modbus_controller
+    name: "Pressure Units"
+    address: 1000
+    value_type: U_WORD
+    optionsmap:
+      "ATM": 0
+      "MPA": 1
+      "KgCM": 2
+
+  - platform: modbus_controller
+    name: "Leakage Sensor"
+    address: 1001
+    value_type: U_WORD
+    optionsmap:
+      "Not Exists": 0
+      "Exists": 1
+
+  - platform: modbus_controller
+    name: "Consumption Sensor Type"
+    address: 1002
+    value_type: U_WORD
+    optionsmap:
+      "Digital": 0
+      "Relay": 1
+      "OFF": 2
+
+  - platform: modbus_controller
+    name: "Control Mode"
+    address: 1005
+    value_type: U_WORD
+    optionsmap:
+      "PI": 0
+      "PID": 1
+      "Lin": 2
+      "Fill": 3
+      "OFF": 4
+
+  - platform: modbus_controller
+    name: "Backlight Mode"
+    address: 1023
+    value_type: U_WORD
+    optionsmap:
+      "Permanent": 0
+      "1 Min": 1
+      "5 Min": 2
+
+  - platform: modbus_controller
+    name: "Relay 2 Mode"
+    address: 1036
+    value_type: U_WORD
+    optionsmap:
+      "OFF": 0
+      "Alarm": 1
+      "Low": 2
+      "High": 3
+      "Second Pump": 4
+      "First Pump": 5
+
+  - platform: modbus_controller
+    name: "Modbus Speed"
+    address: 1500
+    value_type: U_WORD
+    optionsmap:
+      "9600": 0
+      "19200": 1
+      "38400": 2
+      "57600": 3
+      "115200": 4
+
+  - platform: modbus_controller
+    name: "Modbus Parity"
+    address: 1501
+    value_type: U_WORD
+    optionsmap:
+      "None": 0
+      "ODD": 1
+      "EVEN": 2
+
+  - platform: modbus_controller
+    name: "Modbus Stop Bits"
+    address: 1502
+    value_type: U_WORD
+    optionsmap:
+      "1": 1
+      "2": 2
+
+switch:
+  - platform: modbus_controller
+    id: write_to_eeprom
+    register_type: holding
+    address: 1499
+    name: "Write settings to EEPROM"
+    bitmask: 1
+
+  - platform: modbus_controller
+    id: read_from_eeprom
+    register_type: holding
+    address: 1500
+    name: "Read settings to EEPROM"
+    bitmask: 1
+
+  - platform: modbus_controller
+    id: factory_reset
+    register_type: holding
+    address: 1501
+    name: "Factory reset"
+    bitmask: 1
+
+  - platform: modbus_controller
+    id: reboot_device
+    register_type: holding
+    address: 1502
+    name: "Reboot device"
+    bitmask: 1
+
+
+  - platform: modbus_controller
+    id: error_reset
+    name: "Reboot device"
+    custom_command: [ 0xA, 0x6, 0x4, 0x57, 0x00, 0x00 ]

@@ -82,6 +82,7 @@ number:
     name: "Version"
     address: 999
     value_type: U_WORD
+    skip_updates: 30
 
   - platform: modbus_controller
     name: "Consumption Sensor Clicks"

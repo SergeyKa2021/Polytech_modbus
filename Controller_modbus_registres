@@ -1,86 +1,86 @@
-Modbus registers (decimal address)
 KD_M_PCHS water pressure controller by POLYTECH
+Modbus registers (decimal address)
 HW 3.02_110
 
 /// Controller settings 
 Register Type - Holding
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-| Address  | Type    | Size | Access | Values     | Default       | Description
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-|    0999  | rsWord  |    1 |     RO |            |               | Version (XXYY)
-|    1000  | rsWord  |    1 |     RW | 0,1,2      |             1 | Pressure Units (0 = ATM, 1 = MPA, 2 = KgCm2)
-|    1001  | rsWord  |    1 |     RW | 0..1       |             0 | Leak Sensor Exists (0 = OFF, 1 = Exist) 
-|    1002  | rsWord  |    1 |     RW | 0,1,2      |             2 | Consumption Sensor Type (cstDigital = 0 , cstRelay = 1, cstOff = 2)
-|    1003  | rsInt   |    2 |     RW | 0..999     |           100 | Consumption Clicks (Clicks per Liter)
-|    1005  | rsWord  |    1 |     RW | 0..4       |             2 | Control Mode (cmPi = 0,  cmPid = 1, cmLin = 2,  cmFill = 3,  cOff = 4)
-|    1006  | rsFloat |    2 |     RW | 0..X,00    |          0,15 | Pressure Min 
-|    1008  | rsFloat |    2 |     RW | 0..X,00    |          0,25 | Pressure Max
-|    1010  | rsInt   |    2 |     RW | 0..999     |            30 | Low Pressure Response Time (Seconds) 
-|    1012  | rsInt   |    2 |     RW | 0..60      |            10 | Pump Min Working Time (Sec)
-|    1014  | rsInt   |    2 |     RW | 0..999     |            60 | Pump Max Working Time (Min)
-|    1016  | rsFloat |    2 |     RW | 0..X,00    |             0 | User Pressure Zero Point 
-|    1018  | rsFloat |    2 |     RW | 0..X,00    |             0 | User Pressure Correction Coefficient 
-|    1020  | rsWord  |    1 |     RW | 0..60      |             0 | Auto Error Reset Time 
-|    1021  | rsWord  |    1 |     RW | 0..999     |             0 | Water Value Per Session Limit (Litres) (0 = OFF) 
-|    1022  | rsWord  |    1 |     RW | 0..10800   |            10 | Pump Rest Time (Seconds) 
-|    1023  | rsWord  |    1 |     RW | 0,1,2      |             1 | Backlight Mode (0 - permanent, 1 - 1 Min, 2 - 5 Min)
-|    1024  | rsFloat |    2 |     RW | 0..100,0   |         100,0 | Pump Percent Min Power
-|    1026  | rsFloat |    2 |     RW | 0..100,0   |         100,0 | Pump Percent Max Power
-|    1028  | rsFloat |    2 |     RW | 0..9,99    |           2,0 | PID P
-|    1030  | rsFloat |    2 |     RW | 0..9,99    |           1,5 | PID I
-|    1032  | rsFloat |    2 |     RW | 0..9,99    |           1,0 | PID D
-|    1034  | rsFloat |    2 |     RW | 0,01..9,99 |           0,2 | PID Time
-|    1036  | rsWord  |    1 |     RW | 0..5       |             0 | Relay 2 Mode (Off = 0, Alarm = 1, Low = 2, High = 3, SecondPump = 4, FirstPump = 5)
-|    1037  | rsWord  |    1 |     RW | 0..999     |             5 | Relay 2 Low Delay Time (Seconds) 
-|    1038  | rsWord  |    1 |     RW | 0..999     |             5 | Relay 2 High Delay Time (Seconds)
-|    1039  | rsWord  |    1 |     RW | 0..100     |            90 | Relay 2 Second Pump Start Percent
-|    1040  | rsWord  |    1 |     RW | 0..100     |            50 | Relay 2 Second Pump Stop Percent
-|    1041  | rsWord  |    1 |     RW | 0..999     |             5 | Relay 2 Second Pump Delay Time (Seconds)
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
+| Addr(Hex)| Addr(Dec)| Type    | Size | Access | Values     | Default | Description
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
+|   0x03E7 |    0999  | rsWord  |    1 |     RO |            |         | Version (XXYY)
+|   0x03E8 |    1000  | rsWord  |    1 |     RW | 0,1,2      |       1 | Pressure Units (0 = ATM, 1 = MPA, 2 = KgCm2)
+|   0x03E9 |    1001  | rsWord  |    1 |     RW | 0..1       |       0 | Leak Sensor Exists (0 = OFF, 1 = Exist) 
+|   0x03EA |    1002  | rsWord  |    1 |     RW | 0,1,2      |       2 | Consumption Sensor Type (cstDigital = 0 , cstRelay = 1, cstOff = 2)
+|   0x03EB |    1003  | rsInt   |    2 |     RW | 0..999     |     100 | Consumption Clicks (Clicks per Liter)
+|   0x03ED |    1005  | rsWord  |    1 |     RW | 0..4       |       2 | Control Mode (cmPi = 0,  cmPid = 1, cmLin = 2,  cmFill = 3,  cOff = 4)
+|   0x03EE |    1006  | rsFloat |    2 |     RW | 0..X,00    |    0,15 | Pressure Min 
+|   0x03F0 |    1008  | rsFloat |    2 |     RW | 0..X,00    |    0,25 | Pressure Max
+|   0x03F2 |    1010  | rsInt   |    2 |     RW | 0..999     |      30 | Low Pressure Response Time (Seconds) 
+|   0x03F4 |    1012  | rsInt   |    2 |     RW | 0..60      |      10 | Pump Min Working Time (Sec)
+|   0x03F6 |    1014  | rsInt   |    2 |     RW | 0..999     |      60 | Pump Max Working Time (Min)
+|   0x03F8 |    1016  | rsFloat |    2 |     RW | 0..X,00    |       0 | User Pressure Zero Point 
+|   0x03FA |    1018  | rsFloat |    2 |     RW | 0..X,00    |       0 | User Pressure Correction Coefficient 
+|   0x03FC |    1020  | rsWord  |    1 |     RW | 0..60      |       0 | Auto Error Reset Time 
+|   0x03FD |    1021  | rsWord  |    1 |     RW | 0..999     |       0 | Water Value Per Session Limit (Litres) (0 = OFF) 
+|   0x03FE |    1022  | rsWord  |    1 |     RW | 0..10800   |      10 | Pump Rest Time (Seconds) 
+|   0x03FF |    1023  | rsWord  |    1 |     RW | 0,1,2      |       1 | Backlight Mode (0 - permanent, 1 - 1 Min, 2 - 5 Min)
+|   0x0400 |    1024  | rsFloat |    2 |     RW | 0..100,0   |   100,0 | Pump Percent Min Power
+|   0x0402 |    1026  | rsFloat |    2 |     RW | 0..100,0   |   100,0 | Pump Percent Max Power
+|   0x0404 |    1028  | rsFloat |    2 |     RW | 0..9,99    |     2,0 | PID P
+|   0x0406 |    1030  | rsFloat |    2 |     RW | 0..9,99    |     1,5 | PID I
+|   0x0408 |    1032  | rsFloat |    2 |     RW | 0..9,99    |     1,0 | PID D
+|   0x040A |    1034  | rsFloat |    2 |     RW | 0,01..9,99 |     0,2 | PID Time
+|   0x040C |    1036  | rsWord  |    1 |     RW | 0..5       |       0 | Relay 2 Mode (Off = 0, Alarm = 1, Low = 2, High = 3, SecondPump = 4, FirstPump = 5)
+|   0x040D |    1037  | rsWord  |    1 |     RW | 0..999     |       5 | Relay 2 Low Delay Time (Seconds) 
+|   0x040E |    1038  | rsWord  |    1 |     RW | 0..999     |       5 | Relay 2 High Delay Time (Seconds)
+|   0x040F |    1039  | rsWord  |    1 |     RW | 0..100     |      90 | Relay 2 Second Pump Start Percent
+|   0x0410 |    1040  | rsWord  |    1 |     RW | 0..100     |      50 | Relay 2 Second Pump Stop Percent
+|   0x0411 |    1041  | rsWord  |    1 |     RW | 0..999     |       5 | Relay 2 Second Pump Delay Time (Seconds)
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
 
 /// Sensors (Holdings)
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-| Address  | Type    | Size | Access | Values     | Default       | Description
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-|    1099  | rsFloat |    2 |     RO |            |               | Current Pressure 
-|    1101  | rsFloat |    2 |     RO |            |               | Current Power
-|    1103  | rsFloat |    2 |     RO |            |               | Water Total Volume (Litres)
-|    1105  | rsFloat |    2 |     RO |            |               | Instant Water Value (Litres per Min/Sec?)
-|    1107  | rsInt   |    2 |     RO |            |               | Pump Total Working Time
-|    1109  | rsWord  |    1 |     RO | 0..1       |               | Is Leak
-|    1110  | rsWord  |    1 |     RO | 0..1       |               | Is Working
-|    1111  | rsInt   |    2 |     RW |            |             0 | Error Code (Write 0 to reset) 
-|          |         |      |        |            |               | 0 = Normal, 
-|          |         |      |        |            |               | 10 = Pressure below low limit? 
-|          |         |      |        |            |               | 11 = Max Working Time Expired, 
-|          |         |      |        |            |               | 20 = No data from consumption sensor (Dig mode),
-|          |         |      |        |            |               | 21 = No data from consumption sensor (Relay mode),
-|          |         |      |        |            |               | 40 = Water Leakage
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
+| Addr(Hex)| Addr(Dec)| Type    | Size | Access | Values     | Default | Description
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
+|   0x044B |    1099  | rsFloat |    2 |     RO |            |         | Current Pressure 
+|   0x044D |    1101  | rsFloat |    2 |     RO |            |         | Current Power
+|   0x044F |    1103  | rsFloat |    2 |     RO |            |         | Water Total Volume (Litres)
+|   0x0451 |    1105  | rsFloat |    2 |     RO |            |         | Instant Water Value (Litres per Min/Sec?)
+|   0x0453 |    1107  | rsInt   |    2 |     RO |            |         | Pump Total Working Time
+|   0x0455 |    1109  | rsWord  |    1 |     RO | 0..1       |         | Is Leak
+|   0x0456 |    1110  | rsWord  |    1 |     RO | 0..1       |         | Is Working
+|   0x0457 |    1111  | rsInt   |    2 |     RW |            |       0 | Error Code (Write 0 to reset) 
+|          |          |         |      |        |            |         | 0 = Normal (no errors), 
+|          |          |         |      |        |            |         | 10 = Pressure below low limit? 
+|          |          |         |      |        |            |         | 11 = Max Working Time Expired, 
+|          |          |         |      |        |            |         | 20 = No data from consumption sensor (Dig mode),
+|          |          |         |      |        |            |         | 21 = No data from consumption sensor (Relay mode),
+|          |          |         |      |        |            |         | 40 = Water Leakage
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
 
 /// Config read/write, reset and reboot
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-| Address  | Type    | Size | Access | Values     | Default       | Description
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-|    1399  | rsWord  |    1 |     WO | 1          |               | Write config into EEPROM, recalculate PID
-|    1400  | rsWord  |    1 |     WO | 1          |               | Read config from EEPROM, recalculate PID
-|    1401  | rsWord  |    1 |     WO | 1          |               | Factory Reset
-|    1402  | rsWord  |    1 |     WO | 1          |               | Reboot device
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
+| Addr(Hex)| Addr(Dec)| Type    | Size | Access | Values     | Default | Description
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
+|   0x0577 |    1399  | rsWord  |    1 |     WO | 1          |         | Write config into EEPROM, recalculate PID
+|   0x0578 |    1400  | rsWord  |    1 |     WO | 1          |         | Read config from EEPROM, recalculate PID
+|   0x0579 |    1401  | rsWord  |    1 |     WO | 1          |         | Factory Reset
+|   0x057A |    1402  | rsWord  |    1 |     WO | 1          |         | Reboot device
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
 
 /// MODBUS Settings
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-| Address  | Type    | Size | Access | Values     | Default       | Description
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-|    1499  | rsWord  |    1 |     RW | 1..247     |            10 | MODBUS Address
-|    1500  | rsWord  |    1 |     RW | 0..4       |             0 | MODBUS Speed (mbs9600 = 0,  mbs19200 = 1,  mbs38400 = 2,  mbs57600 = 3,  mbs115200 = 4)
-|    1501  | rsWord  |    1 |     RW | 0,1,2      |             2 | MODBUS Parity (0 = NONE, 1 = ODD,  2 = EVEN)
-|    1502  | rsWord  |    1 |     RW | 1..2       |             1 | MODBUS Stop Bits
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
+| Addr(Hex)| Addr(Dec)| Type    | Size | Access | Values     | Default | Description
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
+|   0x05DB |    1499  | rsWord  |    1 |     RW | 1..247     |      10 | MODBUS Address
+|   0x05DC |    1500  | rsWord  |    1 |     RW | 0..4       |       0 | MODBUS Speed (mbs9600 = 0,  mbs19200 = 1,  mbs38400 = 2,  mbs57600 = 3,  mbs115200 = 4)
+|   0x05DD |    1501  | rsWord  |    1 |     RW | 0,1,2      |       2 | MODBUS Parity (0 = NONE, 1 = ODD,  2 = EVEN)
+|   0x05DE |    1502  | rsWord  |    1 |     RW | 1..2       |       1 | MODBUS Stop Bits
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
 
 /// Diagnostic
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-| Address  | Type    | Size | Access | Values     | Default       | Description
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
-|    1600  | rsInt   |    2 |     RO |            |               | PID Reading 
-+----------+---------+------+--------+------------+---------------+------------------------------------------------------------------------------------+
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
+| Addr(Hex)| Addr(Dec)| Type    | Size | Access | Values     | Default | Description
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
+|   0x0640 |    1600? | rsInt   |    2 |     RO |            |         | PID Reading 
++----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+

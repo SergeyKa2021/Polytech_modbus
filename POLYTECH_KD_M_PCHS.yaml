@@ -275,5 +275,5 @@ switch:
 
   - platform: modbus_controller
     id: error_reset
-    name: "Reboot device"
+    name: "Reset errors"
     custom_command: [ 0xA, 0x6, 0x4, 0x57, 0x00, 0x00 ]

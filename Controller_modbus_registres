@@ -1,4 +1,5 @@
 Modbus registers (decimal address)
+KD_M_PCHS water pressure controller by POLYTECH
 HW 3.02_110
 
 /// Controller settings 

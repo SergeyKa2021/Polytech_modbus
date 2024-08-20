@@ -13,12 +13,12 @@ Register Type - Holding
 |   0x03EA |    1002  | rsWord  |    1 |     RW | 0,1,2      |       2 | Consumption Sensor Type (cstDigital = 0 , cstRelay = 1, cstOff = 2)
 |   0x03EB |    1003  | rsInt   |    2 |     RW | 0..999     |     100 | Consumption Clicks (Clicks per Liter)
 |   0x03ED |    1005  | rsWord  |    1 |     RW | 0..4       |       2 | Control Mode (cmPi = 0,  cmPid = 1, cmLin = 2,  cmFill = 3,  cOff = 4)
-|   0x03EE |    1006  | rsFloat |    2 |     RW | 0..X,00    |    0,15 | Pressure Min (0,00-0,33 MPA)
-|   0x03F0 |    1008  | rsFloat |    2 |     RW | 0..X,00    |    0,25 | Pressure Max
+|   0x03EE |    1006  | rsFloat |    2 |     RW | 0..X,00    |    0,15 | Pressure Min (0,00-0,99 MPA)
+|   0x03F0 |    1008  | rsFloat |    2 |     RW | 0..X,00    |    0,25 | Pressure Max (0,01-1,00 MPA)
 |   0x03F2 |    1010  | rsInt   |    2 |     RW | 0..999     |      30 | Low Pressure Response Time (Seconds) 
 |   0x03F4 |    1012  | rsInt   |    2 |     RW | 0..60      |      10 | Pump Min Working Time (Sec)
 |   0x03F6 |    1014  | rsInt   |    2 |     RW | 0..999     |      60 | Pump Max Working Time (Min)
-|   0x03F8 |    1016  | rsFloat |    2 |     RW | 0..X,00    |       0 | User Pressure Zero Point 
+|   0x03F8 |    1016  | rsFloat |    2 |     RW | 0..X,00    |       0 | User Pressure Zero Point (0,00-1,20 MPA)
 |   0x03FA |    1018  | rsFloat |    2 |     RW | 0..X,00    |       0 | User Pressure Correction Coefficient 
 |   0x03FC |    1020  | rsWord  |    1 |     RW | 0..60      |       0 | Auto Error Reset Time 
 |   0x03FD |    1021  | rsWord  |    1 |     RW | 0..999     |       0 | Water Value Per Session Limit (Litres) (0 = OFF) 

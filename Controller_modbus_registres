@@ -8,7 +8,7 @@ Register Type - Holding
 | Addr(Hex)| Addr(Dec)| Type    | Size | Access | Values     | Default | Description
 +----------+----------+---------+------+--------+------------+---------+------------------------------------------------------------------------------------+
 |   0x03E7 |    0999  | rsWord  |    1 |     RO |            |         | Version (XXYY)
-|   0x03E8 |    1000  | rsWord  |    1 |     RW | 0,1,2      |       1 | Pressure Units (0 = ATM, 1 = MPA, 2 = KgCm2)
+|   0x03E8 |    1000  | rsWord  |    1 |     RO | 0,1,2      |       1 | Pressure Units (0 = ATM, 1 = MPA, 2 = KgCm2)
 |   0x03E9 |    1001  | rsWord  |    1 |     RW | 0..1       |       0 | Leak Sensor Exists (0 = OFF, 1 = Exist) 
 |   0x03EA |    1002  | rsWord  |    1 |     RW | 0,1,2      |       2 | Consumption Sensor Type (cstDigital = 0 , cstRelay = 1, cstOff = 2)
 |   0x03EB |    1003  | rsInt   |    2 |     RW | 0..999     |     100 | Consumption Clicks (Clicks per Liter)

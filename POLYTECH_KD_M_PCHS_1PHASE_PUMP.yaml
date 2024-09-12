@@ -106,7 +106,7 @@ number:
     max_value: 0.99
     step: 0.01
     mode: BOX
-    unit_of_measurement: "MPA"
+    unit_of_measurement: "MPa"
   
   - platform: modbus_controller
     name: "Pressure MAX"
@@ -116,7 +116,7 @@ number:
     max_value: 1.00
     step: 0.01
     mode: BOX
-    unit_of_measurement: "MPA"
+    unit_of_measurement: "MPa"
 
   - platform: modbus_controller
     name: "Low Pressure Response Time"

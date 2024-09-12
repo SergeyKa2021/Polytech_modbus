@@ -1,7 +1,17 @@
 # For ESPHome platform (ESP32)
-# Framework: Arduino
+# Framework: Esp-idf
 # Water Pressure Controller PID/PI KD-M-PchS (Polytech)
-# 1-Phase pump motor and MPA mode
+#
+# Для контроллера давления КД-М-ПЧс-*-1М-* компании ПолиТех
+# www.pumpcontroller.ru
+#
+# 1М - максимальное давление 1 МПа
+# 2М - максимальное давление 2 МПа
+# 4М - максимальное давление 4 МПа
+#
+# Режим работы с однофазным насосом и дополнительным реле
+#
+# 1-Phase pump motor and MPa mode
 
 uart:
   - id: uart_modbus_client
@@ -31,7 +41,7 @@ sensor:
     address: 1099
     register_type: holding
     value_type: FP32_R
-    accuracy_decimals: 1
+    accuracy_decimals: 2
     unit_of_measurement: "MPa"
     device_class: pressure
    
@@ -67,6 +77,7 @@ sensor:
     address: 1107
     register_type: holding
     value_type: U_DWORD_R
+    unit_of_measurement: Min
 
   - platform: modbus_controller
     name: "Error Code"
@@ -103,7 +114,7 @@ number:
     address: 1006
     value_type: FP32_R
     min_value: 0.00
-    max_value: 0.99
+    max_value: 0.99 # 1.99 for 2M, 3.99 for 4M models
     step: 0.01
     mode: BOX
     unit_of_measurement: "MPa"
@@ -113,7 +124,7 @@ number:
     address: 1008
     value_type: FP32_R
     min_value: 0.01
-    max_value: 1.00
+    max_value: 1.00 # 2.00 for 2M, 4.00 for 4M models
     step: 0.01
     mode: BOX
     unit_of_measurement: "MPa"
@@ -126,6 +137,7 @@ number:
     max_value: 999
     step: 1
     mode: BOX
+    unit_of_measurement: Sec
 
   - platform: modbus_controller
     name: "Pump MIN Working Time"
@@ -227,7 +239,7 @@ button:
                 esphome::modbus_controller::ModbusCommandItem::create_write_single_command(controller, 0x0577, 0x0001);
             delay(200);
             controller->queue_command(write_to_eeprom);
-            ESP_LOGI("ModbusLambda", "Write settings to EEPROM");
+            ESP_LOGI("ModbusLambda", "Write settings to EEPROM button pressed");
 
   - platform: template
     name: "Read settings from EEPROM"
@@ -240,7 +252,7 @@ button:
                 esphome::modbus_controller::ModbusCommandItem::create_write_single_command(controller, 0x0578, 0x0001);
             delay(200);
             controller->queue_command(read_from_eeprom);
-            ESP_LOGI("ModbusLambda", "Read settings from EEPROM");
+            ESP_LOGI("ModbusLambda", "Read settings from EEPROM button pressed");
 
   - platform: template
     name: "Reboot device"
@@ -253,7 +265,7 @@ button:
                 esphome::modbus_controller::ModbusCommandItem::create_write_single_command(controller, 0x057A, 0x0001);
             delay(200);
             controller->queue_command(reboot_device);
-            ESP_LOGI("ModbusLambda", "Reboot device pressed");
+            ESP_LOGI("ModbusLambda", "Reboot device button pressed");
 
   - platform: template
     name: "Reset error Button"
@@ -270,4 +282,4 @@ button:
                 esphome::modbus_controller::ModbusCommandItem::create_write_multiple_command(controller, 0x0457, clear_error_code.size(), clear_error_code);
             delay(200);
             controller->queue_command(reset_error_command);
-            ESP_LOGI("ModbusLambda", "Reset error code");
+            ESP_LOGI("ModbusLambda", "Reset error code button pressed");

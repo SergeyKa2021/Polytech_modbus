@@ -32,7 +32,8 @@ modbus_controller:
     modbus_id: modbus_client
     address: 10
     setup_priority: -10
-    update_interval: 10s
+    update_interval: 5s
+    max_cmd_retries: 1
 
 sensor:
   - platform: modbus_controller
@@ -62,6 +63,8 @@ sensor:
     accuracy_decimals: 1
     unit_of_measurement: "L"
     device_class: water
+    filterd:
+      - multiply: !lambda return 1000;
 
   - platform: modbus_controller
     name: "Instant Water Flow"
